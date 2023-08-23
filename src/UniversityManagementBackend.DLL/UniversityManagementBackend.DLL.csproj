@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\ClassLibrary\UnitOfWorkRepository\UnitOfWorkRepository.csproj" />
+      <ProjectReference Include="..\UniversityManagementBackend.BLL\UniversityManagementBackend.BLL.csproj" />
+      <ProjectReference Include="..\UniversityManagementBackend.Database\UniversityManagementBackend.Database.csproj" />
+    </ItemGroup>
+
+</Project>

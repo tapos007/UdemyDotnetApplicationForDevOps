@@ -17,7 +17,12 @@ builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
 var app = builder.Build();
-app.PerformDbMigration();
+
+if (app.Environment.IsDevelopment())
+{
+    app.PerformDbMigration();
+}
+
 // Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI();

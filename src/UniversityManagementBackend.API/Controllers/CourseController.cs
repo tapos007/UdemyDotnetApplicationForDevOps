@@ -21,6 +21,5 @@ public class CourseController : ControllerBase
         return Ok(await _courseService.GetAll());
     }
     
-    // some architecture changes done here
-    // some modification needed
+    
 }

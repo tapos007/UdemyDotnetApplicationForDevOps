@@ -1,0 +1,19 @@
+trigger:
+- dev
+- master
+- main
+
+pool:
+ name: Default
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    feedsToUse: 'select'
+    vstsFeed: 'my-vsts-feed'
+    projects: 'src/UniversityManagementBackend.API/*.csproj'
+  displayName: 'Restore the project'

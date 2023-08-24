@@ -8,6 +8,9 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  mainProjectLocation: 'src/UniversityManagementBackend.API'
+  testProjectLocation: 'tests/PaymentApplication.Tests'
+  databaseProjectLocation: 'src/UniversityManagementBackend.Database'
 
 steps:
 - task: DotNetCoreCLI@2
@@ -15,5 +18,47 @@ steps:
     command: 'restore'
     feedsToUse: 'select'
     vstsFeed: 'my-vsts-feed'
-    projects: 'src/UniversityManagementBackend.API/*.csproj'
+    projects: '$(mainProjectLocation)/*.csproj'
   displayName: 'Restore the project'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    arguments: '--configuration $(buildConfiguration)'
+    projects: '$(mainProjectLocation)/*.csproj'
+  displayName: 'Build the project'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    arguments: '--configuration $(buildConfiguration)'
+    projects: '$(testProjectLocation)/*.csproj'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'custom'
+    custom: 'tool'
+    arguments: 'update --global dotnet-ef'
+  displayName: 'Intall Dotnet Ef Tools'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'custom'
+    custom: 'ef'
+    arguments: 'migrations script --no-build --idempotent --context ApplicationDbContext --configuration $(buildConfiguration) --project $(databaseProjectLocation)/*.csproj --startup-project $(mainProjectLocation)/*.csproj --output  $(Build.ArtifactStagingDirectory)/Migrations/universityBackendScript.sql'
+  displayName: 'Generate Migration Script' 
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '--configuration $(buildConfiguration)'
+    zipAfterPublish: True
+  displayName: 'Publish the Project file'
+  
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'University_API_Backend'
+  displayName: 'Store the project file in artifact'
+  

@@ -39,8 +39,8 @@ steps:
   inputs:
     command: 'custom'
     custom: 'tool'
-    arguments: 'update --global dotnet-ef'
-  displayName: 'Intall Dotnet Ef Tools'
+    arguments: 'update --global dotnet-ef --ignore-failed-sources'
+  displayName: 'Install Dotnet Ef Tools'
 
 - task: DotNetCoreCLI@2
   inputs:

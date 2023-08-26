@@ -11,13 +11,14 @@ variables:
   mainProjectLocation: 'src/UniversityManagementBackend.API'
   testProjectLocation: 'tests/PaymentApplication.Tests'
   databaseProjectLocation: 'src/UniversityManagementBackend.Database'
+  feedGuid: '0def8815-55c0-4e3f-af1d-492e533bae39/75f55f57-2fac-448f-9e08-303cb4356731'
 
 steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
     feedsToUse: 'select'
-    vstsFeed: 'my-vsts-feed'
+    vstsFeed: '$(feedGuid)'
     projects: '$(mainProjectLocation)/*.csproj'
   displayName: 'Restore the project'
 
@@ -38,8 +39,8 @@ steps:
   inputs:
     command: 'custom'
     custom: 'tool'
-    arguments: 'update --global dotnet-ef'
-  displayName: 'Intall Dotnet Ef Tools'
+    arguments: 'update --global dotnet-ef --ignore-failed-sources'
+  displayName: 'Install Dotnet Ef Tools'
 
 - task: DotNetCoreCLI@2
   inputs:
@@ -61,4 +62,4 @@ steps:
     targetPath: '$(Build.ArtifactStagingDirectory)'
     artifactName: 'University_API_Backend'
   displayName: 'Store the project file in artifact'
-  
+   

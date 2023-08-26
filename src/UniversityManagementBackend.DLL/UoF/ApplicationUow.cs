@@ -1,4 +1,4 @@
-using Infrastructure.UnitOfWorkRepository;
+using UdemyInfrastructure.UnitOfWorkRepository;
 using UniversityManagementBackend.BLL.Interfaces.Repositories;
 using UniversityManagementBackend.BLL.Interfaces.UoF;
 using UniversityManagementBackend.Database;

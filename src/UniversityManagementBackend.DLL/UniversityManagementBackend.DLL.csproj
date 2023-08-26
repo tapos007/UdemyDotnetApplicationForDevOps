@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\ClassLibrary\UnitOfWorkRepository\UnitOfWorkRepository.csproj" />
       <ProjectReference Include="..\UniversityManagementBackend.BLL\UniversityManagementBackend.BLL.csproj" />
       <ProjectReference Include="..\UniversityManagementBackend.Database\UniversityManagementBackend.Database.csproj" />
     </ItemGroup>

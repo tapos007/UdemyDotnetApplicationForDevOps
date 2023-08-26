@@ -1,4 +1,4 @@
-using Infrastructure.UnitOfWorkRepository.Contract;
+using UdemyInfrastructure.UnitOfWorkRepository.Contract;
 using UniversityManagementBackend.BLL.DbEntities;
 using UniversityManagementBackend.BLL.DomainDto;
 

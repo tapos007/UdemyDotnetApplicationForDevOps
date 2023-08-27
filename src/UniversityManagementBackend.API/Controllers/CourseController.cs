@@ -21,6 +21,12 @@ public class CourseController : ControllerBase
         return Ok(await _courseService.GetAll());
     }
     
+    [HttpGet("{id}")]
+    public async  Task<IActionResult> GetA(long id)
+    {
+        return Ok(await _courseService.GetACourse(id));
+    }
+    
     // some architecture changes done here
     // some modification needed
 }
